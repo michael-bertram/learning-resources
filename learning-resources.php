@@ -22,6 +22,39 @@ require_once LEARNING_RESOURCES_DIR . 'includes/post-types.php';
 require_once LEARNING_RESOURCES_DIR . 'includes/taxonomies.php';
 require_once LEARNING_RESOURCES_DIR . 'includes/meta.php';
 
+
+/**
+ * Load the Learning Resource editor sidebar.
+ */
+function learning_resources_enqueue_editor_assets() {
+    $screen = get_current_screen();
+
+    if ( ! $screen || 'learning_resource' !== $screen->post_type ) {
+        return;
+    }
+
+    
+$asset_file = LEARNING_RESOURCES_DIR . 'build/index.asset.php';
+
+if ( ! file_exists( $asset_file ) ) {
+    return;
+}
+
+$asset = require $asset_file;
+
+wp_enqueue_script(
+    'learning-resources-editor-sidebar',
+    plugins_url( 'build/index.js', __FILE__ ),
+    $asset['dependencies'],
+    $asset['version'],
+    array( 'in_footer' => true )
+);
+}
+add_action(
+    'enqueue_block_editor_assets',
+    'learning_resources_enqueue_editor_assets'
+);
+
 function learning_resources_activate() {
 	learning_resources_register_taxonomy();
 	learning_resources_register_post_type();
