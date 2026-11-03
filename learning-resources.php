@@ -20,6 +20,7 @@ require_once LEARNING_RESOURCES_DIR . 'includes/post-types.php';
 require_once LEARNING_RESOURCES_DIR . 'includes/taxonomies.php';
 require_once LEARNING_RESOURCES_DIR . 'includes/meta.php';
 require_once LEARNING_RESOURCES_DIR . 'includes/tutorials-workshops.php';
+require_once LEARNING_RESOURCES_DIR . 'includes/editor.php';
 
 function learning_resources_activate() {
  learning_resources_register_taxonomy();
