@@ -28,7 +28,14 @@ function learning_resources_register_meta() {
 add_action( 'init', 'learning_resources_register_meta' );
 
 function learning_resources_meta_auth( $allowed, $meta_key, $post_id, $user_id, $cap, $caps ) {
-	return user_can( $user_id, 'edit_post', $post_id );
+	$post = get_post( $post_id );
+
+	if ( ! $post || ! in_array( $post->post_type, array( 'learning_resource', 'tutorial', 'workshop' ), true ) ) {
+		return false;
+	}
+
+	$user = get_user_by( 'id', $user_id );
+	return $user instanceof WP_User && user_can( $user, 'edit_post', $post_id );
 }
 
 function learning_resources_sanitize_objectives( $value ) {
