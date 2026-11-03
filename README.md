@@ -9,7 +9,7 @@ A WordPress plugin for structured learning content. It keeps curriculum resource
 - **Workshops** (workshop): standalone facilitated learning experiences. Metadata supports facilitator details, delivery format, venue, sessions, video recordings and supporting materials.
 - **Insights** remain ordinary WordPress posts and are not changed by this plugin.
 
-All three plugin content types can be classified with the shared hierarchical Modules taxonomy. The plugin provides the content model and REST API fields; the active WordPress theme or separate frontend application is responsible for presenting each type with its own layout.
+All three plugin content types can be classified with the shared hierarchical Modules taxonomy. The plugin provides the content model, REST API fields and native Gutenberg sidebar panels for editing structured Tutorial and Workshop metadata. The active WordPress theme or separate frontend application is responsible for presenting each type with its own layout.
 
 ## REST API
 
