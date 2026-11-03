@@ -1,60 +1,32 @@
 # Learning Resources
 
-A WordPress plugin for creating structured learning content, from modules and lessons to nested sub-lessons, topics, exercises and assessments.
+A WordPress plugin for structured learning content. It keeps curriculum resources, step-by-step tutorials and facilitated workshops as distinct content experiences while sharing a common Modules taxonomy.
 
-## Current features
+## Content types
 
-- Hierarchical **Learning Resources** custom post type.
-- Hierarchical **Modules** taxonomy for curriculum classification.
-- WordPress block editor and REST API support.
-- Native parent/child hierarchy and ordering through page attributes.
-- Resource metadata registered for the REST API: type, estimated duration in minutes, difficulty, and learning objectives.
-- Rewrite rules flushed on activation and deactivation.
+- **Learning Resources** (learning_resource): hierarchical curriculum content such as lessons, sub-lessons, topics, exercises and assessments. Existing parent/child relationships and ordering are retained.
+- **Tutorials** (tutorial): standalone, step-by-step guides. Metadata supports an introduction, estimated duration, prerequisites, learning outcomes and ordered steps with explanatory content and code examples.
+- **Workshops** (workshop): standalone facilitated learning experiences. Metadata supports facilitator details, delivery format, venue, sessions, video recordings and supporting materials.
+- **Insights** remain ordinary WordPress posts and are not changed by this plugin.
 
-## Content model
-
-Every piece of learning content is a Learning Resource. The parent/child hierarchy describes its position in the curriculum; the resource type describes what it is.
-
-```text
-WordPress – Full Site Editing
-├── Introduction to Full Site Editing
-├── Block Themes
-│   ├── What is a Block Theme?
-│   ├── Theme Structure
-│   │   ├── Templates
-│   │   ├── Template Parts
-│   │   └── theme.json
-│   └── Creating Your First Block Theme
-└── The Site Editor
-    ├── Navigation
-    ├── Styles
-    └── Template Editing
-```
-
-Numbering should be calculated from the hierarchy and menu order, not typed into titles.
-
-## Installation
-
-1. Copy this repository into `wp-content/plugins/learning-resources`.
-2. Activate **Learning Resources** in WordPress.
-3. Open **Learning Resources** in the dashboard.
-4. Use the parent resource selector and order controls to organise the hierarchy.
+All three plugin content types can be classified with the shared hierarchical Modules taxonomy. The plugin provides the content model and REST API fields; the active WordPress theme or separate frontend application is responsible for presenting each type with its own layout.
 
 ## REST API
 
-- Post type: `/wp-json/wp/v2/learning-resources`
-- Taxonomy: `/wp-json/wp/v2/learning-modules`
+- Learning Resources: /wp-json/wp/v2/learning-resources
+- Tutorials: /wp-json/wp/v2/tutorials
+- Workshops: /wp-json/wp/v2/workshops
+- Modules: /wp-json/wp/v2/learning-modules
 
-Registered resource metadata is exposed in the REST API for authenticated users with permission to edit the resource.
+Custom metadata is exposed through each post's meta REST field. Updating metadata requires an authenticated user who can edit the relevant post.
 
-## Roadmap
+## Installation
 
-- Editor sidebar for resource metadata.
-- Curriculum overview in the dashboard.
-- Module, curriculum and navigation blocks.
-- Breadcrumbs and previous/next navigation.
-- Foundations for learner progress, exercises, quizzes and assessments.
+1. Copy this repository into wp-content/plugins/learning-resources.
+2. Activate Learning Resources in WordPress.
+3. Use the Learning Resources, Tutorials and Workshops menus in the dashboard.
+4. Assign content to Modules to connect it to the wider curriculum.
 
 ## Development
 
-This is the initial PHP foundation. The editor UI and front-end blocks are planned next.
+Requires WordPress 6.6+ and PHP 7.4+. The plugin uses native custom post types, taxonomies, post metadata and REST API registration. It does not impose frontend templates, allowing a theme or frontend application to build distinct Tutorial and Workshop experiences.
